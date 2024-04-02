@@ -33,7 +33,7 @@ const Details: FC<DetailsProps> = ({ transactions }) => {
             <Typography variant="subtitle1">Tx id: {transaction.txId}</Typography>
             <Typography variant="subtitle1">From: {transaction.from}</Typography>
             <Typography variant="subtitle1">To: {transaction.to}</Typography>
-            <Typography variant="subtitle1">Value: {transaction.v} ETH</Typography>
+            <Typography variant="subtitle1">Value: {transaction.value} ETH</Typography>
             <Typography variant="subtitle1">Date: {format(new Date(transaction.date), DATE_TIME_FORMAT.shortDate)}</Typography>
         </TextContainer>
     ));

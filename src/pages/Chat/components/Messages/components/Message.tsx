@@ -26,6 +26,7 @@ const ContentWrapper = styled(Box)<{ $isMine: boolean }>`
     flex-direction: ${({ $isMine }) => $isMine ? "row" : "row-reverse"};
     gap: 4px`;
 
+
 const Message: FC<TMessage> = ({ sender, text, type, transactions }) => {
     const { userName } = useAppContext();
     const isMine = sender === userName;
