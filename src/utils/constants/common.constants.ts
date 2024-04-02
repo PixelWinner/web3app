@@ -6,5 +6,5 @@ export const PAGE_PATH = {
 };
 
 export const DATE_TIME_FORMAT = {
-    shortDate: "dd.MM.yy",
+    shortDate: "dd.MM.yyyy",
 };
