@@ -26,16 +26,28 @@ const ContentWrapper = styled(Box)<{ $isMine: boolean }>`
     flex-direction: ${({ $isMine }) => $isMine ? "row" : "row-reverse"};
     gap: 4px`;
 
+const UserDetails = styled(Box)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px`;
+
 
 const Message: FC<TMessage> = ({ sender, text, type, transactions, userId }) => {
     const { userId: localUserId } = useAppContext();
     const isMine = localUserId === userId;
     const align = isMine ? "right" : "left";
+    const hiddenId = hideId(userId);
 
 
     return (
         <Container $messageType={type} $isMine={isMine}>
-            <Typography align={align} variant="body2" color="text.secondary">{sender}</Typography>
+            <UserDetails>
+                <Typography align={align} variant="body2">{sender}</Typography>
+
+                {type === MessageType.USER && <Typography color="text.secondary" variant="subtitle2"> | {hiddenId}</Typography>}
+            </UserDetails>
+
 
             <ContentWrapper $isMine={isMine}>
                 <Details transactions={transactions} />
@@ -61,4 +73,9 @@ const getAlign = (messageType: MessageType, isMine: boolean): string => {
     }
 
     return "flex-start";
+};
+
+const hideId = (id: string) => {
+    const visiblePart = id.substring(0, 8);
+    return `${visiblePart}***`;
 };
