@@ -41,7 +41,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
         setUserId(v4());
 
         localStorage.setItem(LocalStorage.USER_NAME, name);
-        localStorage.setItem(LocalStorage.USER_NAME, uuid);
+        localStorage.setItem(LocalStorage.USER_ID, uuid);
     },[]);
 
 
