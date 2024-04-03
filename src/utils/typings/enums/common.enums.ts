@@ -1,5 +1,6 @@
 export enum LocalStorage {
     USER_NAME = "userName",
+    USER_ID = "userId",
 }
 
 export enum MessageType {
@@ -10,5 +11,5 @@ export enum MessageType {
 export enum EventType {
     JOIN = "join",
     MESSAGE = "message",
-    LOAD_MESSAGES ="loadMessages"
+    LOAD_MESSAGES = "loadMessages"
 }

@@ -27,11 +27,10 @@ const ContentWrapper = styled(Box)<{ $isMine: boolean }>`
     gap: 4px`;
 
 
-const Message: FC<TMessage> = ({ sender, text, type, transactions }) => {
-    const { userName } = useAppContext();
-    const isMine = sender === userName;
-    const align = isMine? "right" : "left";
-
+const Message: FC<TMessage> = ({ sender, text, type, transactions, userId }) => {
+    const { userId: localUserId } = useAppContext();
+    const isMine = localUserId === userId;
+    const align = isMine ? "right" : "left";
 
 
     return (

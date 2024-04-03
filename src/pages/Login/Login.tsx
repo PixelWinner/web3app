@@ -21,7 +21,7 @@ const Form = styled.form`
     align-items: center`;
 
 const Login = () => {
-    const { setNewUserName } = useAppContext();
+    const { handleLogin } = useAppContext();
 
     const initialValues = {
         userName: ""
@@ -31,7 +31,7 @@ const Login = () => {
         initialValues,
         validationSchema,
         onSubmit: ({ userName }) => {
-            setNewUserName(userName);
+            handleLogin(userName);
         }
     });
 

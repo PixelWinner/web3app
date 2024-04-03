@@ -4,9 +4,9 @@ import { PAGE_PATH } from "@utils/constants/common.constants";
 import { useAppContext } from "@utils/providers/AppProvider";
 
 const PrivateLayout = () => {
-    const { userName } = useAppContext();
+    const { userName, userId } = useAppContext();
 
-    if (!userName) {
+    if (!userName || !userId) {
         return <Navigate to={PAGE_PATH.login} replace />;
     }
 

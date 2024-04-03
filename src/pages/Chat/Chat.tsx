@@ -30,7 +30,7 @@ const Header = styled(Box)`
 const Chat = () => {
     const { id } = useParams();
     const [messages, setMessages] = useState<TMessage[]>([]);
-    const {setNewUserName}=useAppContext()
+    const {handleLogin}=useAppContext()
     const navigate = useNavigate();
 
     const handleBack = () => {
@@ -38,7 +38,7 @@ const Chat = () => {
     }
 
     const handleLogOut =()=>{
-        setNewUserName("")
+        handleLogin("")
     }
 
     const handleLoadMessages = (newMessages: TMessage[])=>{

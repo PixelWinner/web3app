@@ -6,10 +6,10 @@ import { useAppContext } from "@utils/providers/AppProvider";
 const AUTH_PAGES = [PAGE_PATH.login];
 
 const PublicLayout = () => {
-    const { userName } = useAppContext();
+    const { userName, userId } = useAppContext();
     const { pathname } = useLocation();
 
-    const isNeedRedirect = !!userName && AUTH_PAGES.includes(pathname);
+    const isNeedRedirect = (!!userName && !!userId) && AUTH_PAGES.includes(pathname);
 
     if (isNeedRedirect) {
         return <Navigate to={PAGE_PATH.main} replace />;

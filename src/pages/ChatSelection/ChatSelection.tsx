@@ -9,7 +9,7 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { IOSocket } from "@utils/socket/IOSocket";
 import { EventType } from "@utils/typings/enums/common.enums";
 import { useAppContext } from "@utils/providers/AppProvider";
-
+import { JoinData } from "@utils/typings/types/common.types";
 
 
 const Container = styled(Box)`
@@ -27,7 +27,7 @@ const Form = styled.form`
     align-items: center`;
 
 const ChatSelection = () => {
-    const { userName } = useAppContext();
+    const { userName, userId } = useAppContext();
     const navigate = useNavigate();
 
     const initialValues = {
@@ -38,7 +38,9 @@ const ChatSelection = () => {
         initialValues,
         validationSchema,
         onSubmit: ({ chatId }) => {
-            IOSocket.emit(EventType.JOIN, { userName, chatId });
+            const joinData:JoinData = { userId, userName, chatId };
+
+            IOSocket.emit(EventType.JOIN, joinData);
             navigate(`${PAGE_PATH.chat}/${chatId}`);
         }
     });
