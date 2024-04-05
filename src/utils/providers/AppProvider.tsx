@@ -1,38 +1,43 @@
 import React, { FC, PropsWithChildren, createContext, useContext, useMemo, useState, useEffect, useCallback } from "react";
 import { v4 } from "uuid";
 
-import { LocalStorage } from "@utils/typings/enums/common.enums";
+import { EventType, LocalStorage } from "@utils/typings/enums/common.enums";
 import { IOSocket } from "@utils/socket/IOSocket";
 
 type AppContextType = {
     userName: string,
-    userId:string
+    userId: string
     handleLogin: (userName: string) => void,
 };
 
 const INITIAL_USER_NAME = (localStorage.getItem(LocalStorage.USER_NAME)) ?? "";
-const INITIAL_USER_ID = (localStorage.getItem(LocalStorage.USER_ID)) ?? "";
 
 const ThemeContext = createContext<AppContextType>({
     userName: INITIAL_USER_NAME,
-    userId: INITIAL_USER_ID,
+    userId: "",
     handleLogin: () => {
     }
 });
 
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
     const [userName, setUserName] = useState(INITIAL_USER_NAME);
-    const [userId, setUserId] = useState(INITIAL_USER_ID);
+    const [userId, setUserId] = useState("");
+
+    const handleSetId = useCallback((id: string) => {
+        setUserId(id);
+    }, []);
 
     useEffect(() => {
-        if (userName && userId) {
+        if (userName) {
             IOSocket.connect();
+            IOSocket.on(EventType.LOAD_USER_ID, handleSetId);
         }
 
         return () => {
             IOSocket.disconnect();
+            IOSocket.off(EventType.LOAD_USER_ID, handleSetId);
         };
-    }, [userName, userId]);
+    }, [userName]);
 
     const handleLogin = useCallback((name: string) => {
         const uuid = v4();
@@ -42,7 +47,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 
         localStorage.setItem(LocalStorage.USER_NAME, name);
         localStorage.setItem(LocalStorage.USER_ID, uuid);
-    },[]);
+    }, []);
 
 
     const contextValue: AppContextType = useMemo(
