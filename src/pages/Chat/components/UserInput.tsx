@@ -20,7 +20,7 @@ const Form = styled.form`
 
 const UserInput = () => {
     const { id } = useParams();
-    const { userName, userId } = useAppContext();
+    const { userName } = useAppContext();
 
     const initialValues = {
         text: ""
@@ -31,7 +31,7 @@ const UserInput = () => {
         validationSchema,
         onSubmit: ({ text }, formikHelpers) => {
             if (id) {
-                const message: UserMessage = { text, chatId: id, userName, userId };
+                const message: UserMessage = { text, chatId: id, userName };
 
                 IOSocket.emit(EventType.MESSAGE, message);
                 formikHelpers.resetForm();
