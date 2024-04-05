@@ -18,7 +18,7 @@ type MessagesProps = {
 }
 const Messages: FC<MessagesProps> = ({ messages }) => {
     const items = messages.map((message) => <Message key={message.id} {...message} />);
-console.log(messages)
+
     return <Container elevation={3}>{items}</Container>;
 };
 
