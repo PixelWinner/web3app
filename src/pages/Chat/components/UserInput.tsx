@@ -1,8 +1,6 @@
 import React from "react";
 import { Button, TextField } from "@mui/material";
 import styled from "styled-components";
-import { useAppContext } from "@utils/providers/AppProvider";
-import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { IOSocket } from "@utils/socket/IOSocket";
 import { EventType } from "@utils/typings/enums/common.enums";
@@ -19,9 +17,6 @@ const Form = styled.form`
     gap: 8px;`;
 
 const UserInput = () => {
-    const { id } = useParams();
-    const { userName } = useAppContext();
-
     const initialValues = {
         text: ""
     };
@@ -30,12 +25,10 @@ const UserInput = () => {
         initialValues,
         validationSchema,
         onSubmit: ({ text }, formikHelpers) => {
-            if (id) {
-                const message: UserMessage = { text, chatId: id, userName };
+            const message: UserMessage = { text };
 
-                IOSocket.emit(EventType.MESSAGE, message);
-                formikHelpers.resetForm();
-            }
+            IOSocket.emit(EventType.MESSAGE, message);
+            formikHelpers.resetForm();
         }
     });
 
@@ -45,7 +38,7 @@ const UserInput = () => {
                        error={formikHook.touched.text && Boolean(formikHook.errors.text)}
                        helperText={formikHook.touched.text && formikHook.errors.text} onChange={formikHook.handleChange} />
 
-            <Button disabled={!id} variant="contained" type="submit">Enter</Button>
+            <Button variant="contained" type="submit">Enter</Button>
         </Form>
     );
 };

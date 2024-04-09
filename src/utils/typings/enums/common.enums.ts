@@ -12,5 +12,6 @@ export enum EventType {
     JOIN = "join",
     MESSAGE = "message",
     LOAD_MESSAGES = "loadMessages",
-    LOAD_USER_ID = "loadUserId"
+    LOAD_USER_ID = "loadUserId",
+    LEAVE = "leave"
 }

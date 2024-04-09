@@ -34,6 +34,7 @@ const Chat = () => {
     const navigate = useNavigate();
 
     const handleBack = () => {
+        IOSocket.emit(EventType.LEAVE);
         navigate(PAGE_PATH.chatSelection);
     }
 
@@ -50,7 +51,7 @@ const Chat = () => {
     };
 
     useEffect(() => {
-        IOSocket.emit(EventType.LOAD_MESSAGES, id);
+        IOSocket.emit(EventType.LOAD_MESSAGES);
 
         IOSocket.on(EventType.LOAD_MESSAGES, handleLoadMessages);
 

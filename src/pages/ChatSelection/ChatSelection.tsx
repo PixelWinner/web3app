@@ -27,7 +27,7 @@ const Form = styled.form`
     align-items: center`;
 
 const ChatSelection = () => {
-    const { userName, userId } = useAppContext();
+    const { userName } = useAppContext();
     const navigate = useNavigate();
 
     const initialValues = {
@@ -38,7 +38,7 @@ const ChatSelection = () => {
         initialValues,
         validationSchema,
         onSubmit: ({ chatId }) => {
-            const joinData:JoinData = { userId, userName, chatId };
+            const joinData:JoinData = { userName, chatId };
 
             IOSocket.emit(EventType.JOIN, joinData);
             navigate(`${PAGE_PATH.chat}/${chatId}`);

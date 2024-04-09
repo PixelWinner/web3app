@@ -5,7 +5,6 @@ export type TMessage = {
     userId: string;
     text: string;
     sender: string;
-    chatId: string
     type: MessageType;
     transactions: Transaction[]
 }
@@ -13,12 +12,9 @@ export type TMessage = {
 
 export type UserMessage = {
     text: string;
-    userName: string;
-    chatId: string
 }
 
 export type JoinData = {
-    userId: string;
     userName: string;
     chatId: string;
 }
